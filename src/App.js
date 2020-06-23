@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Renderers from './Renderers'
 import people from './services/people'
 
-
+// filters list when using the search box.
 const FilterPeople = (persons, newSearch) => {
   const filteredList = newSearch === '' ?
     persons
@@ -11,6 +11,7 @@ const FilterPeople = (persons, newSearch) => {
   return filteredList
 }
 
+// error and success notifications when modifying the phonebook.
 const Notification = ({ message, errorMsg }) => {
   if (message !== null) {
     return (
@@ -30,6 +31,7 @@ const Notification = ({ message, errorMsg }) => {
 
 
 const App = () => {
+  // variables that require updating
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [newSearch, setNewSearch] = useState('')
@@ -37,13 +39,13 @@ const App = () => {
   const [message, setMessage] = useState(null)
   const [errorMsg, setErrorMsg] = useState(null)
 
+  // calls for getPeople to fetch the phonebook from the server and assings it.
   const hook = () => {
     people.getPeople().then(initPeople => setPersons(initPeople))
   }
-
   useEffect(hook, [])
 
-
+  // adds a person to the phonebook, resets the input boxes and calls for a notification.
   const addPerson = (event) => {
     event.preventDefault()
     const person = { name: newName, number: newNumber }
@@ -61,6 +63,7 @@ const App = () => {
           console.log('returnedPerson', returnedPerson)
         })
     } else {
+      // If the name exists on the server the user is asked if they want to update the number.
       const result = window.confirm(`${person.name} is already in the phonebook. Would you like to update the number?`)
       if (result) {
         const newPersons = persons.filter(personObject => personObject.name === person.name)
@@ -85,20 +88,21 @@ const App = () => {
     }
   }
 
+  // handlers 
   const handleName = (event) => {
     setNewName(event.target.value)
   }
-
   const handleNumber = (event) => {
     setNewNumber(event.target.value)
   }
-
   const handleSearch = (event) => {
     setNewSearch(event.target.value)
   }
 
+  // assigns the list of users that fit the search into a variable.
   const filteredList = FilterPeople(persons, newSearch)
 
+  // Calls renderers to render the page.
   return (
     <div>
       <h2>Phonebook</h2>
