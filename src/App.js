@@ -62,6 +62,14 @@ const App = () => {
           }, 3000)
           console.log('returnedPerson', returnedPerson)
         })
+        .catch(error => {
+          // given data doesnt match the backends validation requirements
+          console.log(error.response.data)
+          setErrorMsg(error.response.data.error)
+          setTimeout(() => {
+            setErrorMsg(null)
+          }, 5000)
+        })
     } else {
       // If the name exists on the server the user is asked if they want to update the number.
       const result = window.confirm(`${person.name} is already in the phonebook. Would you like to update the number?`)
