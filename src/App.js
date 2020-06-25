@@ -39,7 +39,7 @@ const App = () => {
   const [message, setMessage] = useState(null)
   const [errorMsg, setErrorMsg] = useState(null)
 
-  // calls for getPeople to fetch the phonebook from the server and assings it.
+  // calls for getPeople to fetch the phonebook the server and assings it.
   const hook = () => {
     people.getPeople().then(initPeople => setPersons(initPeople))
   }

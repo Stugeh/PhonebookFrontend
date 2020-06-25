@@ -17,8 +17,9 @@ const create = async (newPerson) => {
 
 // updates existing entry.
 const update = async (id, newPerson) => {
-    console.log('updating :>> ', id, newPerson);
+    console.log('updating :>> ', id, newPerson)
     await axios.put(`${baseUrl}/${id}`, newPerson)
+        .catch(error => console.log('error', error))
     const newList = getPeople()
     return newList
 }
