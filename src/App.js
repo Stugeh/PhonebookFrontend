@@ -78,7 +78,7 @@ const App = () => {
               setMessage(null)
             }, 3000)
           }).catch(error => {
-            console.log('error')
+            console.log(error)
             setErrorMsg(`${person.name} has already been removed from the server.`)
             setTimeout(() => {
               setErrorMsg(null)

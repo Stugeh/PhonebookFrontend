@@ -52,4 +52,4 @@ const RenderNumbers = ({ filteredList, setPersons, setMessage }) => {
     )
 }
 
-export default { Person, AddForm, Search, RenderNumbers }
+export default { Person, AddForm, Search, RenderNumbers } 
